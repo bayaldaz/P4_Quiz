@@ -64,15 +64,15 @@ exports.testCmd = (rl,id) => {
     } else {
         try {
             const quiz = model.getByIndex(id);
-            rl.question(  ` ${quiz.question} ? `    ,  answer => {
+            rl.question(  ` ${quiz.question}? `    ,  answer => {
                 respuesta1 = answer.toLowerCase().trim();
                 respuesta2 = quiz.answer.toLowerCase().trim();
                 if ( respuesta1 === respuesta2) {
 
-                log('Su respuesta es:');
+                log('Su respuesta es correcta.');
                 biglog('Correcta', 'green');
             }  else {
-                    log('Su respuesta es:');
+                    log('Su respuesta es incorrecta.');
                     biglog('Incorrecta', 'red');
                 }
                 rl.prompt();
