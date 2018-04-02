@@ -9,7 +9,7 @@ net.createServer(socket => {
 
     console.log("Se ha conectado un cliente desde" + socket.remoteAddress);
 
-    biglog(socket, 'CORE Quiz', 'green');
+    biglog(socket,'CORE Quiz', 'green');
 
 
 
@@ -27,9 +27,10 @@ net.createServer(socket => {
         }
     });
 
-    socket
-        .on("end" , () => {rl.close(); })
-        .on("error" , () => {rl.close(); });
+    socket.on("end" , () => {
+        rl.close(); });
+     socket.on("error" , () => {
+         rl.close(); });
 
     rl.prompt();
 
@@ -88,21 +89,22 @@ net.createServer(socket => {
                 break;
 
             default:
-                console.log(socket, `Comando desconocido: '${colorize(cmd, 'red')}'`);
-                console.log(socket, `Use ${colorize('help', 'green')} para ver todos los comandos disponibles `);
+                log(socket, `Comando desconocido: '${colorize(cmd, 'red')}'`);
+                log(socket, `Use ${colorize('help', 'green')} para ver todos los comandos disponibles `);
                 rl.prompt();
                 break;
         }
 
     })
         .on('close', () => {
-            console.log(socket, 'Adios!');
+           log(socket, 'Adios!');
 
         });
 
 
 })
-    .listen(3030);
+.listen(3030);
+
 
 
 

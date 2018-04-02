@@ -120,8 +120,8 @@ exports.playCmd = (socket, rl) => {
         return new Promise((resolve,reject) => {
 
             if(toBeResolved.length <=0){
-                console.log(socket, "No hay nada mas que preguntar.");
-                console.log(socket, "Fin del juego. Aciertos:" ,score);
+               log(socket, "No hay nada mas que preguntar.");
+               log(socket, "Fin del juego. Aciertos:" ,score);
                 resolve();
                 return;
             }
@@ -133,11 +133,11 @@ exports.playCmd = (socket, rl) => {
                 .then(answer => {
                     if(answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim()){
                         score++;
-                        console.log(socket, "CORRECTO - Lleva ",score, "aciertos.");
+                        log(socket, "CORRECTO - Lleva ",score, "aciertos.");
                         resolve(playOne());
                     } else {
-                        console.log(socket, "INCORRECTO.");
-                        console.log(socket, "Fin del juego. Aciertos:",score);
+                       log(socket, "INCORRECTO.");
+                       log(socket, "Fin del juego. Aciertos:",score);
                         resolve();
                     }
                 })
@@ -152,7 +152,7 @@ exports.playCmd = (socket, rl) => {
             return playOne();
         })
         .catch(error => {
-            console.log(socket, error);
+            log(socket, error);
         })
 
         .then(() => {
@@ -174,8 +174,8 @@ exports.deleteCmd = (socket, rl,id) => {
 };
 
 exports.creditsCmd = (socket, rl) => {
-    console.log(socket, 'Autores de la practica');
-    console.log(socket, 'Byron Aldaz');
+    log(socket, 'Autores de la practica');
+    log(socket, 'Byron Aldaz');
     rl.prompt();
 };
 
@@ -224,7 +224,7 @@ exports.editCmd = (socket, rl,id) => {
 };
 
 
-const validateId = (socket, id) => {
+const validateId =  id => {
 
     return new Sequelize.Promise((resolve,reject) => {
         if (typeof id === "undefined") {
@@ -241,7 +241,7 @@ const validateId = (socket, id) => {
 };
 
 
-const makeQuestion = (socket, rl,text) => {
+const makeQuestion = (rl,text) => {
 
     return new Sequelize.Promise((resolve, reject) => {
         rl.question(colorize(text, 'red'), answer => {
